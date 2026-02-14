@@ -1,0 +1,103 @@
+@startuml Factory_Method_Pattern
+
+title Factory Method Pattern - Character Creation System
+
+interface Character {
+  +getName(): String
+  +getHealth(): int
+  +getMana(): int
+  +getStrength(): int
+  +getIntelligence(): int
+  +displayStats(): void
+  +useSpecialAbility(): void
+  +equipWeapon(Weapon): void
+  +equipArmor(Armor): void
+  +displayEquipment(): void
+}
+
+class Warrior {
+  -name: String
+  -health: int = 150
+  -mana: int = 30
+  -strength: int = 80
+  -intelligence: int = 20
+  -weapon: Weapon
+  -armor: Armor
+  +Warrior(String name)
+  +getName(): String
+  +getHealth(): int
+  +displayStats(): void
+  +useSpecialAbility(): void
+  +equipWeapon(Weapon): void
+  +equipArmor(Armor): void
+  +displayEquipment(): void
+}
+
+class Mage {
+  -name: String
+  -health: int = 80
+  -mana: int = 150
+  -strength: int = 20
+  -intelligence: int = 90
+  -weapon: Weapon
+  -armor: Armor
+  +Mage(String name)
+  +getName(): String
+  +getHealth(): int
+  +displayStats(): void
+  +useSpecialAbility(): void
+  +equipWeapon(Weapon): void
+  +equipArmor(Armor): void
+  +displayEquipment(): void
+}
+
+class Archer {
+  -name: String
+  -health: int = 110
+  -mana: int = 60
+  -strength: int = 60
+  -intelligence: int = 50
+  -weapon: Weapon
+  -armor: Armor
+  +Archer(String name)
+  +getName(): String
+  +getHealth(): int
+  +displayStats(): void
+  +useSpecialAbility(): void
+  +equipWeapon(Weapon): void
+  +equipArmor(Armor): void
+  +displayEquipment(): void
+}
+
+abstract class CharacterFactory {
+  {abstract} +createCharacter(String): Character
+  +createAndDisplay(String): Character
+}
+
+class WarriorFactory {
+  +createCharacter(String): Character
+}
+
+class MageFactory {
+  +createCharacter(String): Character
+}
+
+class ArcherFactory {
+  +createCharacter(String): Character
+}
+
+Character <|.. Warrior : implements
+Character <|.. Mage : implements
+Character <|.. Archer : implements
+
+CharacterFactory <|-- WarriorFactory : extends
+CharacterFactory <|-- MageFactory : extends
+CharacterFactory <|-- ArcherFactory : extends
+
+WarriorFactory ..> Warrior : creates
+MageFactory ..> Mage : creates
+ArcherFactory ..> Archer : creates
+
+CharacterFactory ..> Character : returns
+
+@enduml

@@ -1,0 +1,131 @@
+@startuml Abstract_Factory_Pattern
+
+title Abstract Factory Pattern - Equipment System
+
+interface Weapon {
+  +getDamage(): int
+  +getWeaponInfo(): String
+  +getWeaponType(): String
+  +displayInfo(): void
+}
+
+interface Armor {
+  +getDefense(): int
+  +getArmorInfo(): String
+  +getArmorType(): String
+  +displayInfo(): void
+}
+
+class IronSword {
+  -damage: int = 25
+  -weaponType: String = "Sword"
+  +IronSword()
+  +getDamage(): int
+  +getWeaponInfo(): String
+  +getWeaponType(): String
+  +displayInfo(): void
+}
+
+class PlateArmor {
+  -defense: int = 30
+  -armorType: String = "Heavy Armor"
+  +PlateArmor()
+  +getDefense(): int
+  +getArmorInfo(): String
+  +getArmorType(): String
+  +displayInfo(): void
+}
+
+class WizardStaff {
+  -damage: int = 15
+  -weaponType: String = "Staff"
+  -manaBoost: int = 20
+  +WizardStaff()
+  +getDamage(): int
+  +getWeaponInfo(): String
+  +getWeaponType(): String
+  +getManaBoost(): int
+  +displayInfo(): void
+}
+
+class EnchantedRobes {
+  -defense: int = 10
+  -armorType: String = "Light Armor"
+  -manaBoost: int = 25
+  +EnchantedRobes()
+  +getDefense(): int
+  +getArmorInfo(): String
+  +getArmorType(): String
+  +getManaBoost(): int
+  +displayInfo(): void
+}
+
+class Longbow {
+  -damage: int = 30
+  -weaponType: String = "Bow"
+  -range: String = "Long"
+  +Longbow()
+  +getDamage(): int
+  +getWeaponInfo(): String
+  +getWeaponType(): String
+  +getRange(): String
+  +displayInfo(): void
+}
+
+class LeatherArmor {
+  -defense: int = 20
+  -armorType: String = "Medium Armor"
+  -agilityBonus: int = 15
+  +LeatherArmor()
+  +getDefense(): int
+  +getArmorInfo(): String
+  +getArmorType(): String
+  +getAgilityBonus(): int
+  +displayInfo(): void
+}
+
+interface EquipmentFactory {
+  +createWeapon(): Weapon
+  +createArmor(): Armor
+}
+
+class MedievalEquipmentFactory {
+  +createWeapon(): Weapon
+  +createArmor(): Armor
+}
+
+class MagicEquipmentFactory {
+  +createWeapon(): Weapon
+  +createArmor(): Armor
+}
+
+class RangerEquipmentFactory {
+  +createWeapon(): Weapon
+  +createArmor(): Armor
+}
+
+Weapon <|.. IronSword : implements
+Weapon <|.. WizardStaff : implements
+Weapon <|.. Longbow : implements
+
+Armor <|.. PlateArmor : implements
+Armor <|.. EnchantedRobes : implements
+Armor <|.. LeatherArmor : implements
+
+EquipmentFactory <|.. MedievalEquipmentFactory : implements
+EquipmentFactory <|.. MagicEquipmentFactory : implements
+EquipmentFactory <|.. RangerEquipmentFactory : implements
+
+MedievalEquipmentFactory ..> IronSword : creates
+MedievalEquipmentFactory ..> PlateArmor : creates
+
+MagicEquipmentFactory ..> WizardStaff : creates
+MagicEquipmentFactory ..> EnchantedRobes : creates
+
+RangerEquipmentFactory ..> Longbow : creates
+RangerEquipmentFactory ..> LeatherArmor : creates
+
+EquipmentFactory ..> Weapon : returns
+EquipmentFactory ..> Armor : returns
+
+@enduml
